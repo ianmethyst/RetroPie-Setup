@@ -37,8 +37,8 @@ function _list_depends_sdl2() {
     # these were removed by a PR for vero4k support (cannot test). Needed though at least for for RPI and X11
     ! isPlatform "vero4k" && depends+=(libx11-dev libxcursor-dev libxext-dev libxi-dev libxinerama-dev libxkbcommon-dev libxrandr-dev libxss-dev libxt-dev libxv-dev libxxf86vm-dev libgl1-mesa-dev)
     isPlatform "gles" || isPlatform "gl" && depends+=(libegl1-mesa-dev libgles2-mesa-dev)
-    isPlatform "gl" || isPlatform "rpi" && depends+=(libgl1-mesa-dev libglu1-mesa-dev)
-    isPlatform "kms" || isPlatform "rpi" && depends+=(libdrm-dev libgbm-dev)
+    isPlatform "gl" || isPlatform "rpi" && depends+=(libgl1-mesa-dev libglu1-mesa-dev libpulse-dev)
+    isPlatform "kms" || isPlatform "rpi" && depends+=(libdrm-dev libgbm-dev libpulse-dev)
     isPlatform "x11" && depends+=(libpulse-dev libwayland-dev)
 
     echo "${depends[@]}"

@@ -17,7 +17,7 @@ rp_module_section="core"
 
 function depends_retroarch() {
     local depends=(libudev-dev libxkbcommon-dev libsdl2-dev libasound2-dev libusb-1.0-0-dev)
-    isPlatform "rpi" && depends+=(libraspberrypi-dev)
+    isPlatform "rpi" && depends+=(libraspberrypi-dev libpulse-dev)
     isPlatform "gles" && ! isPlatform "vero4k" && depends+=(libgles2-mesa-dev)
     isPlatform "mesa" && depends+=(libx11-xcb-dev)
     isPlatform "mali" && depends+=(mali-fbdev)
@@ -42,7 +42,7 @@ function sources_retroarch() {
 function build_retroarch() {
     local params=(--disable-sdl --enable-sdl2 --disable-oss --disable-al --disable-jack --disable-qt)
     if ! isPlatform "x11"; then
-        params+=(--disable-pulse)
+        ! isPlatform "rpi" && params+=(--disable-pulse)
         ! isPlatform "mesa" && params+=(--disable-x11)
     fi
     if compareVersions "$__os_debian_ver" lt 9; then
